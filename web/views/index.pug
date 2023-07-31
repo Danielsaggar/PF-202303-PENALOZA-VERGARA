@@ -1,8 +1,10 @@
 doctype html
-html(lang="es")
+html
     head
-        meta(charset="UTF-8")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title RUTAS
-    body 
-    
+        title Simple Marker
+        script(src="https://polyfill.io/v3/polyfill.min.js?features=default")
+        script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQKXbJN9BSYqtf1Fu9gZxHDNPkHP_857k&callback=initMap&libraries=&v=weekly" defer)
+        link(rel="stylesheet" href="./css/styles.css")
+        script(src="./js/maps.js")
+    body
+        #gmp-map
