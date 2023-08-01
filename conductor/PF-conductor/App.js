@@ -1,20 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import "react-native-gesture-handler";
+import React from "react";
 
-export default function App() {
+//Importaciones para navegación
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+const Stack = createStackNavigator();
+
+//Importaciones de vistas
+import placa from "./views/placa"
+import ruta from "./views/rutas"
+
+//Conexión a Firebase
+// import "./apiconfig/firebase-config";
+
+//permisos
+// import "./permisos/ExternalStorage";
+
+
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{header:()=> null}}>
+        <Stack.Screen name="Placa" component={placa} />
+        <Stack.Screen name="Ruta" component={ruta} />
+      </Stack.Navigator>          
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
