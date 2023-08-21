@@ -4,6 +4,9 @@
 node_modules/
 .env
 
+#Key
+key.json
+
 # Expo
 .expo/
 dist/

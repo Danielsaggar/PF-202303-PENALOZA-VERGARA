@@ -2,6 +2,7 @@
  * element that contains the map. */
  #gmp-map {
     height: 100%;
+    display: block;
   }
   
   /* Optional: Makes the sample page fill the window. */

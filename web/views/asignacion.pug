@@ -1,0 +1,17 @@
+doctype html
+html
+    head
+        title Asignación    
+        script(src="https://polyfill.io/v3/polyfill.min.js?features=default")
+        script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQKXbJN9BSYqtf1Fu9gZxHDNPkHP_857k&callback=initMap&libraries=&v=weekly" defer)
+        link(rel="stylesheet" href="./css/styles.css")
+        script(src="./js/markers.js")
+    body
+        form(action="/placa", method="POST") 
+            input(type="text" name="placa" placeholder="Añadir placa") 
+            input(type="submit" value="Añadir")
+        form(id="ruta-form" action="/ruta", method="POST")             
+            input(type="text" name="ruta" placeholder="Añadir ruta") 
+            input(type="submit" value="Añadir")
+            input(type="hidden" id="marcadores" name="marcadores")
+        #gmp-map
