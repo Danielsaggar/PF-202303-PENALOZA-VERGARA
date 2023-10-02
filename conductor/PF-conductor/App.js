@@ -11,7 +11,7 @@ import placa from "./views/placa"
 import ruta from "./views/rutas"
 
 //Conexión a Firebase
-// import "./apiconfig/firebase-config";
+import "./apiconfig/firebase-config";
 
 //permisos
 // import "./permisos/ExternalStorage";

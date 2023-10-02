@@ -26,6 +26,11 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
+    "config": {
+      "googleMaps": {
+        "apiKey": "AIzaSyCQKXbJN9BSYqtf1Fu9gZxHDNPkHP_857k"
+      }
+    },
     "permissions": [
       "CAMERA_ROLL",
       "READ_EXTERNAL_STORAGE",

@@ -13,12 +13,7 @@ html
                     H1 Soy una placa brummmm        
         div#left
             #gmp-map
-        div#right
-            div                
-                input#home.button(type="button" value="Chao" ) 
-            div
-                input#home.button(type="button" value="Chao" ) 
-            div
-                input#home.button(type="button" value="Chao" ) 
-            div
-                input#home.button(type="button" value="Chao" ) 
+        div#right            
+            each conductor in arrayUser                
+                div                
+                    a#home.button(href=`/placa/${conductor[1]}`) #{conductor[0]}                      
