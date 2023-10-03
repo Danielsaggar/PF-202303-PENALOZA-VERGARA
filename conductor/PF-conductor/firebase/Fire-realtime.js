@@ -1,5 +1,5 @@
 // Get a reference to the database service
-import { doc, setDoc, collection, addDoc } from "@firebase/firestore";
+import { doc, setDoc, collection, addDoc, getDocs } from "@firebase/firestore";
 import { realdb, db } from "./../apiconfig/firebase-config";
 import { ref, set, onValue, onChildChanged, update } from "firebase/database";
 
@@ -48,6 +48,15 @@ function readUserData(setMarkers, userId) {
       console.log(" Data: ", Doc.key, Doc.val().Tag);
     });  
 });
+}
+
+async function readRutasData() {      
+    const collectionRef = collection(db, "rutas");
+    //Aquí puedes buscar el documento en Firestore usando el placaId
+    const querySnapshot = await getDocs(collectionRef);
+    const documents = querySnapshot.docs.map(doc => doc.data());
+    console.log("Query: ", documents)  
+    return(documents)
 }
 
 function getUserData() {
@@ -100,4 +109,4 @@ function getUserData() {
 } */
 
 
-export { writeUserData, readUserData, getUserData, updateUserData, usuariosOnline, HistoricUser };
+export { writeUserData, readUserData, getUserData, updateUserData, usuariosOnline, HistoricUser, readRutasData };
