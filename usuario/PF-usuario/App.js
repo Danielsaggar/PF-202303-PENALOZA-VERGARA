@@ -9,9 +9,10 @@ const Stack = createStackNavigator();
 //Importaciones de vistas
 import placa from "./views/placa"
 import ruta from "./views/rutas"
+import mapa from "./views/mapa"
 
 //Conexión a Firebase
-// import "./apiconfig/firebase-config";
+import "./apiconfig/firebase-config";
 
 //permisos
 // import "./permisos/ExternalStorage";
@@ -21,8 +22,8 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{header:()=> null}}>
-        <Stack.Screen name="Placa" component={placa} />
-        <Stack.Screen name="Ruta" component={ruta} />
+        <Stack.Screen name="Placa" component={placa} />        
+        <Stack.Screen name="Mapa" component={mapa} />
       </Stack.Navigator>          
     </NavigationContainer>
   );

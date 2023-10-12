@@ -17,10 +17,15 @@ import { ScrollView } from "react-native-gesture-handler";
 import style from "../src/styles/Elements";
 import BackGroundStyle from "./../src/styles/Background";
 
+import { writeUserData, readRutasData } from "./../firebase/Fire-realtime";
+
 function TagViewScreen({ navigation }) {
+  
   //Variables de la base de datos
   const [Loc, setLoc] = useState("");
   const [Tag, setTag] = useState("");
+  const [rutas, setRutas] = useState([]);
+
 
   //Función para obtener posición actual
   async function getLocationAsync() {
@@ -34,13 +39,14 @@ function TagViewScreen({ navigation }) {
     let location = await Location.getCurrentPositionAsync({});
     return location;
   }
-const handleStoreData = async () => {    
-    console.log("Lat:",Loc.coords.latitude, "Lon: ",Loc.coords.longitude) 
-    navigation.navigate("Ruta");    
+const handleStoreData = async () => {        
+    navigation.navigate("Mapa");    
   };
 
   useEffect(async () => {
-    setLoc(await getLocationAsync());    
+    setLoc(await getLocationAsync());  
+    const rutasData = await readRutasData();
+      setRutas(rutasData);
   }, []); //Ejecutar solo una vez al montar el componente
 
   return (
@@ -50,12 +56,13 @@ const handleStoreData = async () => {
           <View
             style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
           >
-            <Text>First Screen</Text>
+            <Text>Escoge tu ruta: </Text>
             <Text>Tag:</Text>
-            <TextInput value={Tag} onChangeText={setTag} />
+            {Object.keys(rutas).map((key) => (
             <TouchableOpacity style={style.button} onPress={handleStoreData}>
-              <Text style={style.buttontext}>Comenzar</Text>
+              <Text style={style.buttontext}>{`${key}: ${rutas[key].Nombre}`}</Text>
             </TouchableOpacity>
+             ))}
           </View>
         </ScrollView>
       </SafeAreaView>
