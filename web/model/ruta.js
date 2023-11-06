@@ -14,7 +14,20 @@ async function new_ruta(data) {
         })
         .catch((error) => {
             console.error('Error al crear el documento:', error);
-        });        
+        });              
+}
+
+// Leer cosas
+async function read_point() {                        
+  const userDocRef = db.collection('rutas');                 
+  userDocRef.get()
+  .then((docRef) => {
+      console.log('docRef:', docRef);
+      console.log('Leido exitosamente');                        
+  })
+  .catch((error) => {
+      console.error('Error al leer el documento:', error);
+  });              
 }
 
 // Crear un nuevo documento en realtime
@@ -26,5 +39,6 @@ function real_placa(placa, id) {
   }
 
 module.exports = {
-    new_ruta
+    new_ruta,
+    read_point
   }

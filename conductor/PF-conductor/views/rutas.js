@@ -140,6 +140,9 @@ const handleStoreData = async () => {
             <TouchableOpacity style={style.button} onPress={handleStoreData}>
               <Text style={style.buttontext}>Regresar</Text>
             </TouchableOpacity>
+            <TouchableOpacity style={style.button} onPress={handleStoreData}>
+              <Text style={style.buttontext}>Panic button</Text>
+            </TouchableOpacity>
           </View>
         </ScrollView>
       </SafeAreaView>

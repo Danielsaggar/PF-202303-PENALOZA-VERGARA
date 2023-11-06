@@ -16,10 +16,17 @@ router.post('/', async (req, res) => {
     .where('Id', '==', data.Ruta)
     .get();
     const documents = querySnapshot.docs.map(doc => doc.data());  
-    const baka = true
+    const baka = true    
     const Nuevaruta = {
         "Ruta": documents[0].Nombre,
-        "Id_Ruta": data.Ruta
+        "Id_Ruta": data.Ruta,
+        "Puntos": documents[0].Puntos.map((punto) => {
+          // Agrega un campo "Descripción" a cada punto
+          return {
+            ...punto, // Mantiene los campos existentes
+            "check": false
+          };
+        }),
     };   
 
 
@@ -41,8 +48,10 @@ router.post('/', async (req, res) => {
         }
       });
 
-    // res.redirect('/'); 
-    res.render('edit', {documents, placaId, baka});
+    // res.redirect('/');
+    console.log("Document post: ", documents) 
+    res.redirect(`/placa/${placaId}`);
+    // res.render('edit', {documents, placaId, baka});
 });
 
 module.exports = router;
