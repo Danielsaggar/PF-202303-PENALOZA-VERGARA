@@ -9,6 +9,7 @@ const Stack = createStackNavigator();
 //Importaciones de vistas
 import placa from "./views/placa"
 import ruta from "./views/rutas"
+import seleccion from "./views/seleccion"
 
 //Conexión a Firebase
 import "./apiconfig/firebase-config";
@@ -23,6 +24,7 @@ function App() {
       <Stack.Navigator screenOptions={{header:()=> null}}>
         <Stack.Screen name="Placa" component={placa} />
         <Stack.Screen name="Ruta" component={ruta} />
+        <Stack.Screen name="Seleccion" component={seleccion} />
       </Stack.Navigator>          
     </NavigationContainer>
   );

@@ -6,7 +6,7 @@ const { ref, set, onValue, onChildChanged, updat, get  } =require("firebase/data
 const usuariosOnline = ref(realdb, "conductores/");
 
 /* GET home page. */
-router.get('/', async function(req, res, next) {  
+router.get('/online', async function(req, res, next) {  
   const arrayUser =[]
   await get(usuariosOnline)
   .then((snapshot) => {
@@ -16,7 +16,13 @@ router.get('/', async function(req, res, next) {
       for (const nombreColeccion in datos) {
         // Verifica si la propiedad es un objeto (para excluir 'latitude' y 'longitude').
         if (typeof datos[nombreColeccion] === 'object') {          
-          arrayUser.push([nombreColeccion,datos[nombreColeccion].Placa])
+            const userData = {
+                nombre: nombreColeccion,
+                Placa: datos[nombreColeccion].Placa,
+                latitude: datos[nombreColeccion].latitude,
+                longitude: datos[nombreColeccion].longitude
+              };
+              arrayUser.push(userData);
         }
       }      
     } else {
@@ -26,7 +32,7 @@ router.get('/', async function(req, res, next) {
   .catch((error) => {
     console.error('Error al obtener datos:', error);
   });    
-  res.render('index', {arrayUser});
+  res.send(arrayUser);
 });
 
 module.exports = router;

@@ -7,6 +7,7 @@ html
         link(rel="stylesheet" href="./css/styles.css")
         link(rel="icon", href="./static/admilogo.ico")
         script(src="./js/maps.js")
+        script(src="./js/RutaConductor.js")
     body 
         header            
             nav.navegacion 
@@ -26,15 +27,24 @@ html
             div.HL  
                 form(action="/update", method="post")              
                     div                
-                        h1 Placa: #{placaId} 
-                        input(type="hidden" id=placaId name="placaId" value=placaId)                        
-                                                      
+                        h1 Placa: #{placaId}                        
+                        input(type="hidden" id="placaId" name="placaId" value=placaId)                        
+                        if !baka
+                            label(for="Ruta") Seleccionar una ruta:
+                            select(name="Ruta")
+                                each ruta in documents
+                                    option(value=ruta.Id) #{ruta.Nombre}                                      
+                            input(type="submit" value="Seleccionar ruta")                                           
+        div#left
+            #gmp-map     
+        div#right  
             if baka
                 each ruta in documents
                     div 
                         h1 Ruta: #{ruta.Nombre}                      
                         each puntos, index in ruta.Puntos
-                            h2 Punto #{index + 1}: Lat: #{puntos.latitud} Lon: #{puntos.longitud}
+                            h2 Punto #{index + 1}: Lat: #{puntos.latitud} Lon: #{puntos.longitud} Check: #{puntos.check ? 'Sí' : 'No'}
+
             else
                 div.texto
                     h2 No hay rutas seleccionadas para este conductor.

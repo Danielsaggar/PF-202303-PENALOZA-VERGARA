@@ -61,8 +61,7 @@ async function readRutasData() {
 
 function getUserData() {
   const markers = [];
-  return new Promise((resolve, reject) => {
-    const usuariosOnline = ref(realdb, "users/");
+  return new Promise((resolve, reject) => {    
     // Registrar un evento 'onValue' con la opción 'onlyOnce' para detener la escucha después de la primera invocación
     onValue(usuariosOnline, (snapshot) => {
       snapshot.forEach((doc) => {           
@@ -71,7 +70,7 @@ function getUserData() {
         const newMarkers = {
           id: doc.key,
           location: { latitude, longitude },
-          title: doc.val().Tag,
+          title: "Conductor",
         };
         markers.push(newMarkers);
       });
@@ -88,25 +87,5 @@ function getUserData() {
     // No es necesario ejecutar el mensaje de error aquí fuera de 'onValue'
   });
 }
-
-/* function uploadUserData() {
-  return new Promise((resolve, reject) => {    
-    onChildChanged(usuariosOnline, (snapshot) => {
-      console.log("Este es el Snapshot: ", snapshot);
-      console.log("Este es la key: ", snapshot.key);
-      const latitude = snapshot.val().latitude;
-      const longitude = snapshot.val().longitude;
-      const newMarkers = {
-        id: snapshot.key,
-        location: { latitude, longitude },
-        title: snapshot.val().Tag,
-      };
-      resolve(newMarkers);
-    }, (error) => {
-      reject("Usuario no encontrado: " + error);
-    });
-  });
-} */
-
 
 export { writeUserData, readUserData, getUserData, updateUserData, usuariosOnline, HistoricUser, readRutasData };

@@ -15,6 +15,9 @@ app.set('view engine', 'pug');
 const indexRouter = require('./routes/get/route-index');
 const asignacionRouter = require('./routes/get/route-asignacion');
 const conductoresRouter = require('./routes/get/route-conductores');
+const OnlineUsers = require('./routes/get/users-online');
+const Conductor = require('./routes/get/route-conductor');
+
 const placaRouter = require('./routes/post/route-placa');
 const rutasRouter = require('./routes/post/route-rutas');
 const updateRouter = require('./routes/post/route-update');
@@ -28,6 +31,8 @@ app.use(express.static('public'));
 app.use('/', indexRouter);
 app.use('/', asignacionRouter);
 app.use('/', conductoresRouter);
+app.use('/', OnlineUsers);
+app.use('/', Conductor);
 
 //Manejo de solicitudes POST
 app.use('/placa', placaRouter);
