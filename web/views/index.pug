@@ -5,15 +5,34 @@ html
         script(src="https://polyfill.io/v3/polyfill.min.js?features=default")
         script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQKXbJN9BSYqtf1Fu9gZxHDNPkHP_857k&callback=initMap&libraries=&v=weekly" defer)
         link(rel="stylesheet" href="./css/styles.css")
+        link(rel="icon", href="./static/admilogo.ico")
         script(src="./js/maps.js")
+        script(src="./js/menu.js")
+        
     body
-        header            
-            div.HL               
-                div                    
-                    H1 Soy una placa brummmm        
+        header.header 
+            nav.navegacion 
+                 ul.menu 
+                     li 
+                        a  menu 
+                        ul.submenu 
+                             li 
+                                 a(href="") Crear ruta     
+                             li 
+                                 a(href="asignar") Asignar ruta
+                             li 
+                                 a tres
+
+
+
+
+
         div#left
             #gmp-map
-        div#right            
+        div#right  
+     
             each conductor in arrayUser                
-                div                
-                    a#home.button(href=`/placa/${conductor[1]}`) #{conductor[0]}                      
+                div   
+                            
+                 a#home.button(href=`/placa/${conductor[1]}`) #{conductor[0]}                      
+

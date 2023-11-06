@@ -4,6 +4,11 @@
     height: 100%;
     display: block;
   }
+  *{
+    padding: 0%;
+    margin: 0;
+    box-sizing: border-box;
+  }
   
   /* Optional: Makes the sample page fill the window. */
   html,
@@ -22,7 +27,7 @@
     z-index: 1;
     position: fixed;
     top: 0;
-    background-color: #389a0e;
+    background-color: #CAFFB8;
   }
   .HL{    
     margin-left: 2vh;
@@ -46,9 +51,9 @@
   #left{      
     float: left;
     justify-content: center;        
-    margin-top: 10vh;
-    width: 70%;
-    height: 90%;    
+    
+    width: 75%;
+    height: 100%;    
     overflow: auto; 
     text-align: start;      
   }
@@ -58,30 +63,109 @@
     float: right;
     justify-content: center;    
     right: 2%;
-    margin-top: 10vh;
-    width: 30%;
-    height: 90%;      
+    
+    width: 25%;
+    height: 100%;      
     overflow: hidden; 
     text-align: start;      
-    background-color: green;
+    background-color: #CAFFB8;
   }
   #right div{       
-    background-color: aquamarine;
+    
     align-items: center;
     text-align: center;
-    margin-top: 15%;
+    margin-top: 25%;
+    height: 9%;
   }
 
   .button {
     display: inline-block;
     background-color: #389a0e;
     color: #fff;
-    padding: 10px 20px;
+    padding: 20px 90px;
     border-radius: 20px;
-    text-decoration: none;    
-    flex-grow: 1;  
-  }
+    text-decoration: none;   
+    flex-grow: 4;  
+      }
 
   .button:hover {
     background-color: #1ae03e;
   }
+
+
+
+	
+nav{
+  align-items: center;
+  width: 100%;
+  padding: 10px 20px;
+  position: fixed;
+  border-bottom: 1px;
+  list-style: none;
+}
+
+
+  
+
+
+
+header{
+  align-items: center;
+  background-color: #CAFFB8;
+  width: 1000px;
+  list-style: none;
+  margin: 0px auto;
+  
+ margin-left: 75%;
+ margin-bottom: 50px;
+
+}
+
+
+
+nav ul {list-style: none;
+margin-right: 27cm;
+}
+
+.menu > li{
+  position: relative;
+  display: inline-block;
+  align-items: center;
+}
+.menu >li>a {
+  display: block;
+  padding: 15px 20px;
+  color: #002200;
+  text-decoration: none;
+  font-size: 0.8cm;
+  
+}
+.menu li a:hover {
+  color: #389a0e;
+  transition: all .3s;
+}
+/*submenu*/
+.submenu{
+  position: absolute;
+  background-color: #CAFFB8;
+  width: 170%;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 1s;
+  align-items: center;
+}
+.submenu li a {
+  display: block;
+  padding: 15px;
+  text-decoration: none;
+  font-size: 0.5cm;
+  color: #002200;
+}
+.menu li:hover .submenu {
+  visibility: visible;
+  opacity: 1;
+}
+.texto{
+color: #002200;
+padding: 50px 20px;
+}
