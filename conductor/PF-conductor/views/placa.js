@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import * as Location from "expo-location";
 import { writeUserData, readRutasData } from "./../firebase/Fire-realtime";
-import bottombg from "./../assets/flork.jpg";
+import bottombg from "./../assets/fondo1.jpg";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ScrollView } from "react-native-gesture-handler";
 import style from "../src/styles/Elements";
@@ -74,7 +74,7 @@ function TagViewScreen({ navigation }) {
             <Text>Conductor:</Text>
             <TextInput value={Conductor} onChangeText={setConductor} />
             <TouchableOpacity style={style.button} onPress={handleStoreData}>
-              <Text style={style.buttontext}>Comenzar</Text>
+              <Text style={style.buttontext}>Seguir</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>

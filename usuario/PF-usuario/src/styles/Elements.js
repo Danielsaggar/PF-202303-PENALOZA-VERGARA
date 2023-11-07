@@ -20,7 +20,7 @@ const style = StyleSheet.create({
   input: { color: colors.redinput },
 
   button: {
-    backgroundColor: colors.redButtom,
+    backgroundColor: colors.Buttoms,
     height: 50,
     width: 140,
     justifyContent: "center",
@@ -45,8 +45,8 @@ const style = StyleSheet.create({
   tittle: {
     marginTop: 30,
     marginBottom: 30,
-    fontSize: 50,
-    color: colors.redLetters,
+    fontSize: 30,
+    color: colors.Letters,
   },
 });
 
