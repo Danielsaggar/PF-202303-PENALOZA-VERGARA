@@ -43,11 +43,29 @@ const handleStoreData = async () => {
     navigation.navigate("Mapa");    
   };
 
-  useEffect(async () => {
-    setLoc(await getLocationAsync());  
-    const rutasData = await readRutasData();
-      setRutas(rutasData);
-  }, []); //Ejecutar solo una vez al montar el componente
+  useEffect(() => {
+    // Definir una función asincrónica
+    async function fetchData() {
+      try {
+        // Realizar operaciones asincrónicas aquí, por ejemplo, obtener la ubicación
+        const location = await getLocationAsync();
+        setLoc(location);
+  
+        // Obtener datos de rutas de manera asincrónica
+        const rutasData = await readRutasData();
+        setRutas(rutasData);
+      } catch (error) {
+        // Manejar errores si ocurren
+        console.error("Error en useEffect:", error);
+      }
+    }
+  
+    // Llama a la función asincrónica inmediatamente
+    fetchData();
+  
+    // El efecto se ejecutará solo una vez al montar el componente debido a las dependencias vacías
+  }, []); 
+  
 
   return (
     <ImageBackground source={bottombg} style={BackGroundStyle.backGroundImg}>
