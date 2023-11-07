@@ -17,6 +17,7 @@ const asignacionRouter = require('./routes/get/route-asignacion');
 const conductoresRouter = require('./routes/get/route-conductores');
 const OnlineUsers = require('./routes/get/users-online');
 const Conductor = require('./routes/get/route-conductor');
+const Historicos = require('./routes/get/route-historicos');
 
 const placaRouter = require('./routes/post/route-placa');
 const rutasRouter = require('./routes/post/route-rutas');
@@ -33,6 +34,7 @@ app.use('/', asignacionRouter);
 app.use('/', conductoresRouter);
 app.use('/', OnlineUsers);
 app.use('/', Conductor);
+app.use('/', Historicos);
 
 //Manejo de solicitudes POST
 app.use('/placa', placaRouter);
