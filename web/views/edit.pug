@@ -11,20 +11,17 @@ html
     body 
         header            
             nav.navegacion 
-                 ul.menu 
-                     li 
+                ul.menu 
+                    li 
                         a(href="")  menu 
                         ul.submenu 
-                             li 
-                                 a(href="") Crear ruta     
-                             li 
-                                 a(href="../asignar") Asignar ruta
-                             li 
-                                 a tres
-        div#left
-            #gmp-map     
-        div#right 
-            div.HL  
+                            li 
+                                a(href="") Crear ruta     
+                            li 
+                                a(href="../asignar") Asignar ruta
+                            li 
+                                a tres
+            div.HL#selector  
                 form(action="/update", method="post")              
                     div                
                         h1 Placa: #{placaId}                        
@@ -34,17 +31,16 @@ html
                             select(name="Ruta")
                                 each ruta in documents
                                     option(value=ruta.Id) #{ruta.Nombre}                                      
-                            input(type="submit" value="Seleccionar ruta")                                           
+                            input(type="submit" value="Seleccionar ruta")                                    
         div#left
             #gmp-map     
-        div#right  
+        div#right
             if baka
                 each ruta in documents
                     div 
                         h1 Ruta: #{ruta.Nombre}                      
                         each puntos, index in ruta.Puntos
-                            h2 Punto #{index + 1}: Lat: #{puntos.latitud} Lon: #{puntos.longitud} Check: #{puntos.check ? 'Sí' : 'No'}
-
+                            h2 Punto #{index + 1}: Lat: #{puntos.latitud} Lon: #{puntos.longitud} Check: #{puntos.check ? 'Sí' : 'No'}            
             else
                 div.texto
                     h2 No hay rutas seleccionadas para este conductor.

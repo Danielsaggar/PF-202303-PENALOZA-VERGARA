@@ -30,15 +30,7 @@ router.get('/conductor', async (req, res) => {
         res.send([]);
       }
     });
-    
-
-    // // res.redirect('/');    
-    // // res.redirect(`/placa/${placaId}`);
-    // const Example = [
-    //   { "Nombre": "Juan", "edad": 30 },
-    //   { "Nombre": "Juan", "edad": 30 }
-    // ];
-    // res.send(Example)
+  
 });
 
 module.exports = router;
