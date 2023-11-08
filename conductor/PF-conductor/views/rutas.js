@@ -12,7 +12,7 @@ import {
 import * as UpdateLocation from "expo-location";
 import { getUserData, usuariosOnline, updateUserData, HistoricUser } from "../firebase/Fire-realtime";
 import { onChildChanged } from "firebase/database";
-import bottombg from "./../assets/flork.jpg";
+import bottombg from "./../assets/fondo1.jpg";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ScrollView } from "react-native-gesture-handler";
 import style from "../src/styles/Elements";
