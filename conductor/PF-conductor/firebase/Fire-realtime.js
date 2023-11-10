@@ -7,14 +7,29 @@ const usuariosOnline = ref(realdb, "conductores/");
 var usuario = "";
 
 // Write data to Firebase
-function writeUserData(latitude, longitude, Placa, Conductor) {
+async function writeUserData(latitude, longitude, Placa, Conductor) {
   usuario = Conductor;
-  set(ref(realdb, "conductores/" + usuario), {
-    latitude: latitude,
-    longitude: longitude,
-    Placa: Placa,    
-  });
+  const ubicacionRef = ref(realdb, "conductores/" + usuario);
+  
+// Verificar si la ubicación ya existe en la base de datos
+    if (ubicacionRef) {
+    // La ubicación ya existe, puedes actualizar los datos o hacer lo que necesites.
+    // Por ejemplo, podrías realizar un update en lugar de un set.
+    update(ubicacionRef, {
+      latitude: latitude,
+      longitude: longitude,
+      Placa: Placa,
+    });
+  } else {
+    // La ubicación no existe, puedes crearla utilizando set.
+    set(ubicacionRef, {
+      latitude: latitude,
+      longitude: longitude,
+      Placa: Placa,
+    });
+  }
 }
+
 
 function updateUserData(latitude, longitude) {
   update(ref(realdb, "conductores/" + usuario), {
@@ -50,13 +65,47 @@ function readUserData(setMarkers, userId) {
 });
 }
 
-async function readRutasData() {      
+async function readRutasData(Conductor) {      
+    usuario = Conductor;
+    const ConductorOnline = ref(realdb, "conductores/" + usuario);
+    const rutas = [];
+    // Registrar un evento 'onValue' con la opción 'onlyOnce' para detener la escucha después de la primera invocación
+    const obtenerRutas = new Promise((resolve, reject) => {
+      onValue(ConductorOnline, (snapshot) => {
+        console.log("Snapshot: ", snapshot.val().Ruta);        
+
+        rutas.push(snapshot.val().Ruta);
+    
+        // Cuando hayas completado tu lógica, resuelve la promesa con el mapa
+        resolve();
+      },
+      {
+        onlyOnce: true,
+        cancelCallback: (error) => {
+          // Manejar el error en el callback de error
+          reject(error);
+        }
+      });
+    });
+    
+    // Luego, puedes usar la promesa para obtener el mapa
+    obtenerRutas
+      .then(() => {
+        // Aquí puedes usar el mapa
+        console.log("Realtime: ",rutas);
+        // return(map)
+      })
+      .catch((error) => {
+        // Manejar errores
+        console.error(error);
+      });
+
     const collectionRef = collection(db, "rutas");
     //Aquí puedes buscar el documento en Firestore usando el placaId
     const querySnapshot = await getDocs(collectionRef);
-    const documents = querySnapshot.docs.map(doc => doc.data());
-    console.log("Query: ", documents)  
-    return(documents)
+    const documents = querySnapshot.docs.map(doc => doc.data());    
+    console.log("Metodo tradicional", documents)
+    return(rutas)
 }
 
 function getUserData() {

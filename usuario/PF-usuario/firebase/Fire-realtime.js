@@ -45,7 +45,7 @@ const HistoricUser = async (userId, latitude, longitude, accuracy, date) => {
 function readUserData(setMarkers, userId) {  
   onValue(usuariosOnline, (snapshot) => {
     snapshot.forEach((Doc) => {
-      console.log(" Data: ", Doc.key, Doc.val().Tag);
+      console.log(" Data: ", Doc.key);
     });  
 });
 }
@@ -64,16 +64,22 @@ function getUserData() {
   return new Promise((resolve, reject) => {    
     // Registrar un evento 'onValue' con la opción 'onlyOnce' para detener la escucha después de la primera invocación
     onValue(usuariosOnline, (snapshot) => {
-      snapshot.forEach((doc) => {           
-        const latitude = doc.val().latitude;
-        const longitude =  doc.val().longitude;
-        const newMarkers = {
-          id: doc.key,
-          location: { latitude, longitude },
-          title: "Conductor",
-        };
-        markers.push(newMarkers);
-      });
+      snapshot.forEach((doc) => {                 
+        const data = doc.val(); // Obtener los datos del documento
+
+    if (data && data.latitude) {
+      // Verificar si data existe y tiene una propiedad 'latitude'
+      console.log("Estoy tomando algo:", doc);
+      const latitude = data.latitude;
+      const longitude = data.longitude;
+      const newMarkers = {
+        id: doc.key,
+        location: { latitude, longitude },
+        title: "Conductor",
+      };
+      markers.push(newMarkers);
+    }
+  });
       // Llamar a 'resolve' después de procesar los datos
       resolve(markers);
     }, 

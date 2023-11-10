@@ -47,9 +47,10 @@ function TagViewScreen({ navigation }) {
     if (true) {
       // El usuario está autenticado, obtiene su UID           
       await writeUserData(Loc.coords.latitude, Loc.coords.longitude, Placa, Conductor);
+      rutas = await readRutasData(Conductor);
+      console.log("Soy las rutas: ", rutas)
       setPlaca("");      
-      setConductor("");      
-      rutas = await readRutasData();
+      setConductor("");            
       navigation.navigate("Seleccion", rutas);
     } else {
       // No hay usuario autenticado

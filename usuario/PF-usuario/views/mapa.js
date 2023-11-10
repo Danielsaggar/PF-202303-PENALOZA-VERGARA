@@ -53,18 +53,16 @@ function MapScreen() {
     console.log("Función: ",Update)
   };
 
-  function LookDatabase() {          
+  function LookDatabase() {         
       onChildChanged(usuariosOnline, async (snapshot, previus) => {              
         const FirstMarkers = await getUserData();  
+        console.log("Marcadores: ",FirstMarkers)   
         setMarkers(FirstMarkers);  
       })
   };
   
 
   useEffect(async () => {        
-    // Suscribirse a los cambios de estado de la aplicación
-    AppState.addEventListener('change', handleAppStateChange);   
-
     const FirstMarkers = await getUserData();  
     setMarkers(FirstMarkers);
     LookDatabase();             
@@ -84,8 +82,8 @@ function MapScreen() {
                 longitudeDelta: LONGITUDE_DELTA,
               }
             : {
-                latitude: 37.78825,
-                longitude: -122.4324,
+                latitude: 11.017733285935588, 
+                longitude: -74.8488739006918,
                 latitudeDelta: LATITUDE_DELTA,
                 longitudeDelta: LONGITUDE_DELTA,
               }
