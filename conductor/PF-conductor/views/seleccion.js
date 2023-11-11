@@ -65,7 +65,7 @@ function SeleccionScreen({ navigation }) {
           <View
             style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
           >
-            <Text>Escoge tu ruta CV</Text>                                    
+            <Text style={style.tittle}>TUS RUTAS:</Text>                                    
             {Object.keys(parametros).map((item, index) => (
             <TouchableOpacity style={style.button} onPress={handleStoreData}>
               <Text style={style.buttontext}>{parametros[index]}</Text>
