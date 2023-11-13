@@ -21,7 +21,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.danielsaggar.PFconductor"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -44,6 +45,11 @@
       "ACCESS_NETWORK_STATE",
       "FOREGROUND_SERVICE",
       "WAKE_LOCK"
-    ]  
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "72264bbc-0c5f-4c64-a07b-6e67090df30d"
+      }
+    }
   }
 }
