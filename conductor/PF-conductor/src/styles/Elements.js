@@ -5,8 +5,14 @@ import colors from "../constans/color";
 const style = StyleSheet.create({
   inputContainer: {
     flexDirection: "row",
-    marginTop: 20,
-    marginBottom: 20,
+    borderBottomColor: 'black', 
+    borderBottomWidth: 1.5,
+    width: 300,
+    alignContent: "center",
+    justifyContent: "center",
+    flex:1,
+    backgroundColor: 'rgba(255, 255, 255, 0.6)',
+    height:40,
   },
 
   logoImage: {
@@ -17,7 +23,9 @@ const style = StyleSheet.create({
     marginBottom: 20,
   },
 
-  input: { color: colors.redinput },
+  input: { color: colors.Letters ,
+  
+  },
 
   button: {
     backgroundColor: colors.buttom,
@@ -26,27 +34,41 @@ const style = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 20,
-    marginLeft: 50,
+    marginLeft: 20,
+    marginTop: 40,
   },
   buttonb: {
-    backgroundColor: colors.redButtom,
+    backgroundColor: colors.buttom,
     height: 50,
-    width: 140,
+    width: 300,
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 20,
-    marginLeft: 100,
+    marginTop: 30,
+    borderRadius: 20,
   },
 
   buttontext: {
-    fontSize: 17,
+    fontSize: 20,
     color: colors.whiteletters,
+    
   },
   tittle: {
     marginTop: 30,
     marginBottom: 30,
-    fontSize: 50,
-    color: colors.redLetters,
+    fontSize: 40,
+    color: colors.Letters,
+    shadowOffset: 30,
+    fontFamily: 'Inter'
+    },
+  subtittle: {
+    marginTop: 30,
+    marginBottom: 30,
+    fontSize: 20,
+    color: colors.Letters,
+    
+    alignContent: "center"
+    
   },
 });
 

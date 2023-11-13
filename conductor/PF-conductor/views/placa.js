@@ -69,12 +69,13 @@ function TagViewScreen({ navigation }) {
           <View
             style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
           >
-            <Text>First Screen</Text>
-            <Text>Placa:</Text>
-            <TextInput value={Placa} onChangeText={setPlaca} />
-            <Text>Conductor:</Text>
-            <TextInput value={Conductor} onChangeText={setConductor} />
-            <TouchableOpacity style={style.button} onPress={handleStoreData}>
+            <Text style={style.tittle}>BIENVENIDO</Text>
+            <Text style={style.subtittle}>Ingresa tu placa:</Text>
+            <View style={style.inputContainer} ><TextInput style={style.input} value={Placa} onChangeText={setPlaca} /></View>
+            <Text style={style.subtittle}>Ingresa tu nombre:</Text>
+            <View style={style.inputContainer} ><TextInput value={Conductor} onChangeText={setConductor} /></View>
+            
+            <TouchableOpacity style={style.buttonb} onPress={handleStoreData}>
               <Text style={style.buttontext}>Seguir</Text>
             </TouchableOpacity>
           </View>
