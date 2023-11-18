@@ -1,32 +1,39 @@
 // Esta función hace una solicitud para obtener los datos actualizados
-
 document.addEventListener('DOMContentLoaded', function () {
     async function fetchAndRenderData() {
     const placa = document.getElementById("placaId")    
-    const placaId = placa.value    
-    console.log("placa", placaId)
+    const placaId = placa.value        
     try {
       const response = await fetch(`/conductor?placaId=${placaId}`); // Debes definir tu ruta de servidor adecuadamente
       if (response.ok) {        
-        const data = await response.json();
-        if(data[0].Ruta){
+        const data = await response.json();   
+        console.log("Data", data[0])     
+        if(data[0].Rutas){
            // Actualiza la interfaz de usuario con los nuevos datos
           // Por ejemplo, puedes recorrer los datos y crear elementos HTML para mostrarlos
           // y luego anexarlos al div#right
-          const rightDiv = document.getElementById('right');
-          const selector = document.getElementById('selector');
+          const rightDiv = document.getElementById('right');          
           rightDiv.innerHTML = ''; // Limpia el contenido anterior
-          selector.innerHTML = ''; // Limpia el contenido anterior
-          data.forEach((ruta) => {
+                    
+          data[0].Rutas.forEach((ruta) => {
+            console.log("Ruta: ", ruta)
             const rutaElement = document.createElement('div');
+            rutaElement.id = 'ruta';
+            rutaElement.className = 'rutas';
+            const puntosElement = document.createElement('div');
+            puntosElement.id = 'puntos'; // Puedes asignar el ID que desees
             rutaElement.innerHTML = `
-            <h1>Ruta: ${ruta.Ruta}</h1>
+            <h1>Ruta: ${ruta.Ruta}</h1>       
+            `;
+            puntosElement.innerHTML = `
             ${ruta.Puntos.map((Puntos, index) => `
-              <h2>Punto ${index + 1}: Lat: ${Puntos.latitud} Lon: ${Puntos.longitud} Check: ${Puntos.check ? 'Sí' : 'No'}
-            `).join('')}
-          `;
-          rightDiv.appendChild(rutaElement);
-          });
+            <h2>Punto ${index + 1}: Lat: ${Puntos.latitud} Lon: ${Puntos.longitud} Check: ${Puntos.check ? 'Sí' : 'No'}
+            `).join('')}    
+            `;
+            // Agregar el nuevo div como hijo de rutaElement
+            rutaElement.appendChild(puntosElement);
+            rightDiv.appendChild(rutaElement);
+          });      
         }else{
           console.log("No hay ruta ")
         }       
@@ -36,9 +43,8 @@ document.addEventListener('DOMContentLoaded', function () {
     } catch (error) {
       console.error('Error:', error);
     }
-  }
-  
+  }  
   // Llama a la función inicialmente y establece un intervalo para actualizaciones periódicas
   fetchAndRenderData();
-  setInterval(fetchAndRenderData, 1000); // Actualiza cada 1 segundos (ajusta el intervalo según tus necesidades)
+  setInterval(fetchAndRenderData, 50000); // Actualiza cada 1 segundos (ajusta el intervalo según tus necesidades)
 });

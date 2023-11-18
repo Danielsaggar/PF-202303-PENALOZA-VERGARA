@@ -57,9 +57,7 @@ const style = StyleSheet.create({
     marginTop: 30,
     marginBottom: 30,
     fontSize: 40,
-    color: colors.Letters,
-    shadowOffset: 30,
-    fontFamily: 'Inter'
+    color: colors.Letters,        
     },
   subtittle: {
     marginTop: 30,

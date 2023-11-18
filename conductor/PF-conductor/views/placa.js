@@ -17,10 +17,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { ScrollView } from "react-native-gesture-handler";
 import style from "../src/styles/Elements";
 import BackGroundStyle from "./../src/styles/Background";
+import useMapaLogic from "../models/LocationComp";
 
 
 
 function TagViewScreen({ navigation }) {
+  const { location } = useMapaLogic();   
   
   //Variables de la base de datos
   const [Loc, setLoc] = useState("");
@@ -30,25 +32,25 @@ function TagViewScreen({ navigation }) {
   const [selectedValue, setSelectedValue] = useState(null); // Declarar selectedValue
 
   //Función para obtener posición actual
-  async function getLocationAsync() {
-    // Primero, solicita permiso para acceder a la ubicación del usuario
-    let { status } = await Location.requestForegroundPermissionsAsync();
-    if (status !== "granted") {
-      console.log("Permiso para acceder a la ubicación denegado");
-      return;
-    }
-    // Si se concede el permiso, obtén la ubicación actual del usuario
-    let location = await Location.getCurrentPositionAsync({});
-    return location;
-  }
+  // async function getLocationAsync() {
+  //   // Primero, solicita permiso para acceder a la ubicación del usuario
+  //   let { status } = await Location.requestForegroundPermissionsAsync();
+  //   if (status !== "granted") {
+  //     console.log("Permiso para acceder a la ubicación denegado");
+  //     return;
+  //   }
+  //   // Si se concede el permiso, obtén la ubicación actual del usuario
+  //   let location = await Location.getCurrentPositionAsync({});
+  //   return location;
+  // }
 
   const handleStoreData = async () => {
-    setLoc(await getLocationAsync());    
+    setLoc(location);    
     if (true) {
       // El usuario está autenticado, obtiene su UID           
       await writeUserData(Loc.coords.latitude, Loc.coords.longitude, Placa, Conductor);
       rutas = await readRutasData(Conductor);
-      console.log("Soy las rutas: ", rutas)
+      // console.log("Soy las rutas: ", rutas)
       setPlaca("");      
       setConductor("");            
       navigation.navigate("Seleccion", rutas);
@@ -58,9 +60,24 @@ function TagViewScreen({ navigation }) {
     }
   };
 
-  useEffect(async () => {
-    setLoc(await getLocationAsync());    
-  }, []); //Ejecutar solo una vez al montar el componente
+  useEffect(() => {
+    // Declarar la función asíncrona dentro de useEffect
+    const fetchData = async () => {
+      try {
+        // Puedes poner tu lógica asíncrona aquí        
+        setLoc(location);
+      } catch (error) {
+        // Manejar errores si es necesario
+        console.error('Error en useEffect:', error);
+      }
+    };
+  
+    // Llamar a la función asíncrona inmediatamente
+    fetchData();
+  
+    // Especificar las dependencias de useEffect si es necesario
+  }, []); // O [] si el efecto no depende de props o estado
+  
 
   return (
     <ImageBackground source={bottombg} style={BackGroundStyle.backGroundImg}>

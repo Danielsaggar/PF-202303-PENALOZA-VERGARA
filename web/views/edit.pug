@@ -8,6 +8,8 @@ html
         link(rel="icon", href="./static/admilogo.ico")
         script(src="./js/maps.js")
         script(src="./js/RutaConductor.js")
+        script(src="./js/rutaCheck.js")
+        script(src="./js/visualizar.js")
     body 
         header            
             nav.navegacion 
@@ -26,7 +28,7 @@ html
                     div                
                         h1 Placa: #{placaId}                        
                         input(type="hidden" id="placaId" name="placaId" value=placaId)                        
-                        if !baka
+                        if !false
                             label(for="Ruta") Seleccionar una ruta:
                             select(name="Ruta")
                                 each ruta in documents

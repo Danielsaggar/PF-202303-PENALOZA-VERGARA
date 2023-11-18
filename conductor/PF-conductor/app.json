@@ -45,7 +45,24 @@
       "ACCESS_NETWORK_STATE",
       "FOREGROUND_SERVICE",
       "WAKE_LOCK"
-    ],
+    ],"services": {
+      "updates": {
+        "intentFilters": [
+          {
+            "action": "ACTION_BOOT_COMPLETED"
+          },
+          {
+            "action": "ACTION_MY_PACKAGE_REPLACED"
+          }
+        ],
+        "class": "expo.modules.updates.manifest.listener.ShellAppManifestBroadcastReceiver",
+        "foregroundService": {
+          "notificationTitle": "Actualizando posición",
+          "notificationBody": "La aplicación está actualizando su posición",
+          "notificationColor": "#f5a623"
+        }
+      }
+    },
     "extra": {
       "eas": {
         "projectId": "72264bbc-0c5f-4c64-a07b-6e67090df30d"

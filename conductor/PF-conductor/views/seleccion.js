@@ -18,10 +18,12 @@ import { ScrollView } from "react-native-gesture-handler";
 import style from "../src/styles/Elements";
 import BackGroundStyle from "./../src/styles/Background";
 import { useRoute } from '@react-navigation/native';
+import useMapaLogic from "../models/LocationComp";
 
 
 
 function SeleccionScreen({ navigation }) {
+  const { location } = useMapaLogic();   
     const route = useRoute();
     const parametros = route.params;
   //Variables de la base de datos
@@ -45,7 +47,7 @@ function SeleccionScreen({ navigation }) {
   }
 
   const handleStoreData = async () => {
-    setLoc(await getLocationAsync());    
+    setLoc(location);    
     if (true) {                 
       navigation.navigate("Ruta"); 
     } else {
@@ -54,9 +56,21 @@ function SeleccionScreen({ navigation }) {
     }
   };
 
-  useEffect(async () => {
-    setLoc(await getLocationAsync());    
-  }, []); //Ejecutar solo una vez al montar el componente
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoc(location);
+      } catch (error) {
+        console.error('Error en useEffect:', error);
+      }
+    };
+  
+    // Llama a fetchData inmediatamente
+    fetchData();
+  
+    // Especifica las dependencias de useEffect si es necesario
+  }, []);
+  
 
   return (
     <ImageBackground source={bottombg} style={BackGroundStyle.backGroundImg}>

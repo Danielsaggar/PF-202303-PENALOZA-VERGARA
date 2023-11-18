@@ -35,10 +35,11 @@ TaskManager.defineTask(BACKGROUND_TASK_NAME, async () => {
     const date = new Date();
     const location = await UpdateLocation.getCurrentPositionAsync(); 
     const Bdate = date.toLocaleDateString()+" "+date.toLocaleTimeString()
-    console.log('Ubicación en segundo plano:', location, "Fecha: ", Bdate);
+    // console.log('Ubicación en segundo plano:', location, "Fecha: ", Bdate);
 
     // Actualizar la base de datos de Firebase            
     updateUserData(location.coords.latitude, location.coords.longitude);    
+    HistoricUser(location.coords.latitude, location.coords.longitude, location.coords.accuracy, Bdate)
 
     return null;
   } catch (error) {
@@ -65,7 +66,7 @@ UpdateLocation.startLocationUpdatesAsync(BACKGROUND_TASK_NAME, {
 const handleAppStateChange = (nextAppState) => {
   if (nextAppState === 'background' || 'inactive' || 'unknown') {
     // La aplicación pasó a segundo plano
-    console.log('La aplicación pasó a segundo plano');
+    // console.log('La aplicación pasó a segundo plano');
     UpdateLocation.startLocationUpdatesAsync(BACKGROUND_TASK_NAME, {
       accuracy: UpdateLocation.Accuracy.Low,
       timeInterval: 5000, // milisegundos
@@ -75,7 +76,7 @@ const handleAppStateChange = (nextAppState) => {
     // Ejecutar conexión para actualizar la posición en la base de datos
     // ...
   }else{
-    console.log('La aplicación pasó a primer plano');
+    // console.log('La aplicación pasó a primer plano');
     // Suscribirse a los cambios de ubicación
     UpdateLocation.startLocationUpdatesAsync(BACKGROUND_TASK_NAME, {
     accuracy: UpdateLocation.Accuracy.High,
@@ -87,41 +88,46 @@ const handleAppStateChange = (nextAppState) => {
 
 function TagViewScreen({ navigation }) {
 
-  useEffect(async () => {        
-
-    const requestPermission = async () => {
-      const { status } = await Permissions.askAsync(Permissions.LOCATION_BACKGROUND);
-      if (status === 'granted') {
-        console.log('Permiso concedido');
-      } else {
-        console.log('Permiso denegado');
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { status } = await Permissions.askAsync(Permissions.LOCATION_BACKGROUND);
+        if (status === 'granted') {
+          // console.log('Permiso concedido');
+        } else {
+          // console.log('Permiso denegado');
+        }
+  
+        AppState.addEventListener('change', handleAppStateChange);
+  
+        const FirstMarkers = await getUserData();
+        // setMarkers(FirstMarkers);
+        // LookDatabase();
+  
+        await UpdateLocation.watchPositionAsync(
+          {
+            accuracy: UpdateLocation.Accuracy.High,
+            timeInterval: 10000,
+            distanceInterval: 10,
+          },
+          location => {
+            // console.log('Nueva ubicación:', location);
+            updateUserData(location.coords.latitude, location.coords.longitude);
+            HistoricUser(location.coords.latitude, location.coords.longitude, location.coords.accuracy, Bdate);
+          }
+        );
+        // console.log('Escuchando cambios de ubicación en tiempo real');
+      } catch (error) {
+        console.error('Error en useEffect:', error);
       }
     };
-    requestPermission();
-
-    // Suscribirse a los cambios de estado de la aplicación
-    AppState.addEventListener('change', handleAppStateChange);   
-
-
-    const FirstMarkers = await getUserData();  
-    // setMarkers(FirstMarkers);
-    // LookDatabase();          
-    
-    // Comenzar a escuchar cambios en la ubicación
-    await UpdateLocation.watchPositionAsync(
-      {
-        accuracy: UpdateLocation.Accuracy.High,
-        timeInterval: 10000, // Actualizar cada 10 segundos
-        distanceInterval: 10, // Actualizar cada 10 metros de cambio de distancia
-      },
-      location => {
-        console.log('Nueva ubicación:', location);    
-        updateUserData(location.coords.latitude, location.coords.longitude);    
-        // Aquí puedes llamar a la función writeUserData() o realizar cualquier otra acción con la nueva ubicación
-      }
-    );
-    console.log('Escuchando cambios de ubicación en tiempo real');    
-  }, []);  //Ejecutar solo una vefsaz al montar el compbgfcxvonentebnkmbnkmfdsgfsd 
+  
+    // Llama a fetchData inmediatamente
+    fetchData();
+  
+    // Especificar las dependencias de useEffect si es necesario
+  }, []);
+  
 
 
 const handleStoreData = async () => {

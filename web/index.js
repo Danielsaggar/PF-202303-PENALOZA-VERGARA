@@ -22,6 +22,7 @@ const Historicos = require('./routes/get/route-historicos');
 const placaRouter = require('./routes/post/route-placa');
 const rutasRouter = require('./routes/post/route-rutas');
 const updateRouter = require('./routes/post/route-update');
+const checkRouter = require('./routes/post/route-checklist');
 
 
 app.use('/placa/public', express.static('public'));
@@ -40,6 +41,7 @@ app.use('/', Historicos);
 app.use('/placa', placaRouter);
 app.use('/ruta', rutasRouter);
 app.use('/update', updateRouter);
+app.use('/check', checkRouter);
 
 // Configuración de la Content Security Policy (CSP)
 app.use((req, res, next) => {

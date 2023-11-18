@@ -39,9 +39,9 @@ function updateUserData(latitude, longitude) {
 }
 
 //Añadir al FireStore
-const HistoricUser = async (userId, latitude, longitude, accuracy, date) => {
+const HistoricUser = async (latitude, longitude, accuracy, date) => {
   try {
-    const userDocRef = doc(collection(db, "Historicos"), userId);
+    const userDocRef = doc(collection(db, "Historicos"), usuario);
     await setDoc(userDocRef, {}); // Crea el documento vacío en la colección "Historicos"
     const historicCollectionRef = collection(userDocRef, "Historic");
     const newHistoricDocRef = await addDoc(historicCollectionRef, {
@@ -50,9 +50,9 @@ const HistoricUser = async (userId, latitude, longitude, accuracy, date) => {
       Accuracy: accuracy,
       Date: date,
     });
-    console.log("Document written with ID: ", newHistoricDocRef.id);
+    // console.log("Document written with ID: ", newHistoricDocRef.id);
   } catch (e) {
-    console.error("Error adding document: ", e);
+    // console.error("Error adding document: ", e);
   }
 };
 
@@ -71,28 +71,39 @@ async function readRutasData(Conductor) {
     const rutas = [];
     // Registrar un evento 'onValue' con la opción 'onlyOnce' para detener la escucha después de la primera invocación
     const obtenerRutas = new Promise((resolve, reject) => {
-      onValue(ConductorOnline, (snapshot) => {
-        console.log("Snapshot: ", snapshot.val().Ruta);        
-
-        rutas.push(snapshot.val().Ruta);
-    
-        // Cuando hayas completado tu lógica, resuelve la promesa con el mapa
-        resolve();
-      },
-      {
-        onlyOnce: true,
-        cancelCallback: (error) => {
-          // Manejar el error en el callback de error
-          reject(error);
+      onValue(
+        ConductorOnline,
+        (snapshot) => {
+          const data = snapshot.val();
+  
+          if (data && data.Rutas) {
+            // Si hay datos y existe la propiedad Rutas
+            const rutasConductor = data.Rutas;
+  
+            // Recorrer cada ruta y hacer push al array rutas
+            rutasConductor.forEach((ruta) => {
+              rutas.push(ruta.Ruta);
+            });
+          }
+  
+          // Cuando hayas completado tu lógica, resuelve la promesa con el array de rutas
+          resolve(rutas);
+        },
+        {
+          onlyOnce: true,
+          cancelCallback: (error) => {
+            // Manejar el error en el callback de error
+            reject(error);
+          },
         }
-      });
+      );
     });
     
     // Luego, puedes usar la promesa para obtener el mapa
     obtenerRutas
       .then(() => {
         // Aquí puedes usar el mapa
-        console.log("Realtime: ",rutas);
+        // console.log("Realtime: ",rutas);
         // return(map)
       })
       .catch((error) => {
@@ -104,7 +115,7 @@ async function readRutasData(Conductor) {
     //Aquí puedes buscar el documento en Firestore usando el placaId
     const querySnapshot = await getDocs(collectionRef);
     const documents = querySnapshot.docs.map(doc => doc.data());    
-    console.log("Metodo tradicional", documents)
+    // console.log("Metodo tradicional", documents)
     return(rutas)
 }
 
