@@ -20,12 +20,34 @@ document.addEventListener('DOMContentLoaded', function () {
             });
           });    
 
+          data[0].Rutas.forEach((ruta) => {
+            ruta.Puntos.forEach((punto) => {
+              if (Tolerance(data[0].latitude, punto.latitud, 0.005) && 
+              Tolerance(data[0].longitude, punto.longitud, 0.005) ){
+                punto.check=true
+                console.log("Verdadeo, Kpo")
+              }
+            });
+          });   
+          
+          data[0].Rutas.forEach((ruta) => {
+            let rutaTerminada = true; // Suponemos que la ruta está terminada hasta que se encuentre un punto con check en false
+            ruta.Puntos.forEach((punto) => {
+              if (!punto.check) {
+                // Si encuentra un punto con check en false, marca la ruta como no terminada y sale del bucle
+                rutaTerminada = false;
+                return;
+              }
+            });
+            // Asigna la propiedad terminado a la ruta según la condición
+            ruta.terminado = rutaTerminada;
+          });          
+          
           // Realizar solicitud POST
           const postData = {
             // Datos que deseas enviar en el cuerpo del POST
             placaId: placaId,
-            Rutas: data[0].Rutas,
-            // ...
+            Rutas: data[0].Rutas,            
         };
 
         const postResponse = await fetch('/check', {

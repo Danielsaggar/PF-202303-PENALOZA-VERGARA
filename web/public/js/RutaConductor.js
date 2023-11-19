@@ -25,11 +25,17 @@ document.addEventListener('DOMContentLoaded', function () {
             rutaElement.innerHTML = `
             <h1>Ruta: ${ruta.Ruta}</h1>       
             `;
-            puntosElement.innerHTML = `
-            ${ruta.Puntos.map((Puntos, index) => `
-            <h2>Punto ${index + 1}: Lat: ${Puntos.latitud} Lon: ${Puntos.longitud} Check: ${Puntos.check ? 'Sí' : 'No'}
-            `).join('')}    
-            `;
+            if(ruta.terminado){
+              puntosElement.innerHTML = `
+              <h2>Ruta: terminada</h2>       
+              `;
+            }else{
+              puntosElement.innerHTML = `
+              ${ruta.Puntos.map((Puntos, index) => `
+              <h2>Punto ${index + 1}: Lat: ${Puntos.latitud} Lon: ${Puntos.longitud} Check: ${Puntos.check ? 'Sí' : 'No'}
+              `).join('')}    
+              `;
+            }            
             // Agregar el nuevo div como hijo de rutaElement
             rutaElement.appendChild(puntosElement);
             rightDiv.appendChild(rutaElement);
