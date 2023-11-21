@@ -20,19 +20,24 @@
 
   header{    
     text-align: center;    
-    width: 100%;
+    width: 20%;
     height: 10vh;
     background-size: 100% 100%;
     background-position: center;
     z-index: 1;
     position: fixed;
-    top: 0;
-    background-color: #CAFFB8;
+    top: 0;    
+    align-items: center;
+    background-color: #CAFFB8;    
+    list-style: none;
+    margin: 0px auto;
+    margin-left: 75%;
+    margin-bottom: 50px;    
   }
   .HL{    
     margin-left: 2vh;
-    margin-top: 2vh;
-    width: 50vh;
+    margin-top: 8vh;
+    width: 200%;
     height: 10vh;
     text-align: left;
   } 
@@ -45,7 +50,30 @@
     text-align: center; /* Centrar horizontalmente */
     justify-content: center; /* Centrar horizontalmente */       
   } 
-
+  .HL #selector {
+    padding: 20px;
+    background-color: #f0f0f0;
+    margin-top: 20px;
+  }
+  
+  form {
+    margin: 0;
+  }
+  
+  h1 {
+    font-size: 1.5em;
+  }
+  
+  label {
+    display: block;
+    margin-top: 10px;
+  }
+  
+  select,
+  input[type="submit"] {
+    padding: 10px;
+    margin-top: 5px;
+  }
   
 
   #left{      
@@ -63,19 +91,32 @@
     float: right;
     justify-content: center;    
     right: 2%;
-    
+    padding: 10% 0 0 0;
     width: 25%;
     height: 100%;      
     overflow: overlay; 
     text-align: start;      
     background-color: #CAFFB8;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
   }
-  #right div{       
-    
+  #right div{           
     align-items: center;
     text-align: center;
     margin-top: 25%;
     height: 9%;
+    position: relative;
+  }
+
+  #right #ruta{               
+    position: relative;    
+  }
+
+  #right #ruta #puntos{       
+    width: 100%;        
+    height: auto;
+    position: relative;    
   }
 
   .button {
@@ -98,62 +139,44 @@
 nav{
   align-items: center;
   width: 100%;
-  padding: 10px 20px;
-  position: fixed;
+  padding: 0 40%;
+  position: relative;
   border-bottom: 1px;
   list-style: none;
 }
-
-
-  
-
-
-
-header{
-  align-items: center;
-  background-color: #CAFFB8;
-  width: 1000px;
-  list-style: none;
-  margin: 0px auto;
-  
- margin-left: 75%;
- margin-bottom: 50px;
-
-}
-
-
 
 nav ul {list-style: none;
 margin-right: 27cm;
 }
 
-.menu > li{
+.menu > li {
   position: relative;
   display: inline-block;
-  align-items: center;
 }
-.menu >li>a {
+
+.menu > li > a {
   display: block;
   padding: 15px 20px;
   color: #002200;
   text-decoration: none;
   font-size: 0.8cm;
-  
 }
-.menu li a:hover {
+
+.menu > li > a:hover {
   color: #389a0e;
-  transition: all .3s;
+  transition: all 0.3s;
 }
-/*submenu*/
-.submenu{
+
+/* Submenu */
+.submenu {
   position: absolute;
   background-color: #CAFFB8;
-  width: 170%;
+  width: 100%;
   visibility: hidden;
   opacity: 0;
   transition: opacity 1s;
-  align-items: center;
 }
+
 .submenu li a {
   display: block;
   padding: 15px;
@@ -161,10 +184,31 @@ margin-right: 27cm;
   font-size: 0.5cm;
   color: #002200;
 }
+
 .menu li:hover .submenu {
   visibility: visible;
   opacity: 1;
 }
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+  .menu > li {
+    display: block;
+    width: 100%;
+  }
+
+  .menu > li > a {
+    padding: 15px;
+    text-align: center;
+  }
+
+  .submenu {
+    width: 100%;
+    top: 100%;
+    left: 0;
+  }
+}
+
 .texto{
 color: #002200;
 padding: 50px 20px;
