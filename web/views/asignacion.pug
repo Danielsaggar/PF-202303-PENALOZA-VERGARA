@@ -8,10 +8,6 @@ html
         link(rel="icon", href="./static/admilogo.ico")
         script(src="./js/markers.js")        
     body
-        form(action="/placa", method="POST") 
-            input(type="text" name="placa" placeholder="Añadir placa")             
-            select                                
-            input(type="submit" value="Añadir")
         form(id="ruta-form" action="/ruta", method="POST")             
             input(type="text" name="ruta" placeholder="Añadir ruta") 
             input(type="submit" value="Añadir")

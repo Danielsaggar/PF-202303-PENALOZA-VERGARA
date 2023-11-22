@@ -52,5 +52,5 @@ document.addEventListener('DOMContentLoaded', function () {
   }  
   // Llama a la función inicialmente y establece un intervalo para actualizaciones periódicas
   fetchAndRenderData();
-  setInterval(fetchAndRenderData, 50000); // Actualiza cada 1 segundos (ajusta el intervalo según tus necesidades)
+  setInterval(fetchAndRenderData, 5000); // Actualiza cada 1 segundos (ajusta el intervalo según tus necesidades)
 });

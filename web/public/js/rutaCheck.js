@@ -12,23 +12,13 @@ document.addEventListener('DOMContentLoaded', function () {
           /**Verificar los puntos y la cercanía a ellos**/
           data[0].Rutas.forEach((ruta) => {
             ruta.Puntos.forEach((punto) => {
-              if (Tolerance(data[0].latitude, punto.latitud, 0.005) && 
-              Tolerance(data[0].longitude, punto.longitud, 0.005) ){
+              if (Tolerance(data[0].latitude, punto.latitud, 0.0005) && 
+              Tolerance(data[0].longitude, punto.longitud, 0.0005) ){
                 punto.check=true
                 console.log("Verdadeo, Kpo")
               }
             });
           });    
-
-          data[0].Rutas.forEach((ruta) => {
-            ruta.Puntos.forEach((punto) => {
-              if (Tolerance(data[0].latitude, punto.latitud, 0.005) && 
-              Tolerance(data[0].longitude, punto.longitud, 0.005) ){
-                punto.check=true
-                console.log("Verdadeo, Kpo")
-              }
-            });
-          });   
           
           data[0].Rutas.forEach((ruta) => {
             let rutaTerminada = true; // Suponemos que la ruta está terminada hasta que se encuentre un punto con check en false
@@ -77,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }  
   // Llama a la función inicialmente y establece un intervalo para actualizaciones periódicas
   fetchCheck();
-  setInterval(fetchCheck, 500); // Actualiza cada 1 segundos (ajusta el intervalo según tus necesidades)
+  setInterval(fetchCheck, 2500); // Actualiza cada 1 segundos (ajusta el intervalo según tus necesidades)
 });
 
 function Tolerance(number1, number2, tolerance) {
